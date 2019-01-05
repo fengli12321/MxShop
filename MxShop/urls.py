@@ -19,14 +19,30 @@ import xadmin
 from MxShop.settings import MEDIA_ROOT
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
+from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
 
-# from goods.views_base import GoodsListView
-from goods.views import GoodsListView
+from goods.views import GoodsListViewSet, CategoryViewSet
+from apps.users.views import SmsCodeViewSet
+
+router = DefaultRouter()
+# 配置goods的url
+router.register(r'goods', GoodsListViewSet, base_name="goods")
+
+# 配置goodsCategroy的url
+router.register(r'categorys', CategoryViewSet, base_name="categorys")
+
+
+# 配置verify的url
+router.register(r'codes', SmsCodeViewSet, base_name="codes")
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
-    url(r'^goods/', GoodsListView.as_view(), name='goods_list'),
-    url(r'^docs/', include_docs_urls("文档title")),
-    url(r'^api-auth/', include('rest_framework.urls'))
+    url(r'^', include(router.urls)),
+    url(r'^docs/$', include_docs_urls("文档title")),
+    url(r'^api-auth/', include('rest_framework.urls')),
+    url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^login/', obtain_jwt_token),
 ]
