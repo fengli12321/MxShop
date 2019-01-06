@@ -12,7 +12,7 @@ from rest_framework import status
 
 from random import choice
 
-from .serializers import SmsSerializer
+from .serializers import SmsSerializer, UserRegSerializer
 
 from utils.yunpian import YunPian
 
@@ -56,3 +56,7 @@ class SmsCodeViewSet(CreateModelMixin, viewsets.GenericViewSet):
         return Response({
             "code": code
         }, status=status.HTTP_201_CREATED)
+
+class UserViewSet(CreateModelMixin, viewsets.GenericViewSet):
+    serializer_class = UserRegSerializer
+    queryset = User.objects.all()
