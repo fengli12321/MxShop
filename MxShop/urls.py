@@ -25,6 +25,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 from goods.views import GoodsListViewSet, CategoryViewSet
 from users.views import SmsCodeViewSet, UserViewSet
+from user_operation.views import UserFavViewSets
 
 router = DefaultRouter()
 # 配置goods的url
@@ -42,12 +43,14 @@ router.register(r'codes', SmsCodeViewSet, base_name="codes")
 router.register(r'users', UserViewSet, base_name="users")
 
 
+#收藏
+router.register(r'userfavs', UserFavViewSets, base_name="tttttt_userfavs")
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     url(r'^', include(router.urls)),
-    url(r'^docs/$', include_docs_urls("文档title")),
+    url(r'^docs/', include_docs_urls("文档title")),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^login/', obtain_jwt_token),

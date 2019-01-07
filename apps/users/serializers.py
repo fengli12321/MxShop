@@ -31,12 +31,13 @@ class SmsSerializer(serializers.Serializer):
 
 
 class UserRegSerializer(serializers.ModelSerializer):
-    code = serializers.CharField(required=True, write_only=True, max_length=4, min_length=4, label="验证码==", help_text="验证码")
+    code = serializers.CharField(required=True, write_only=True, max_length=4, min_length=4, label="验证码==", help_text="验证码???")
     username = serializers.CharField(required=True, allow_blank=True, help_text="用户名", validators=[UniqueValidator(queryset=User.objects.all(), message="用户已经存在")])
     password = serializers.CharField(
         style={"input_type": "password"},
         label="密码",
-        write_only=True
+        write_only=True,
+        required=True
     )
 
     # def create(self, validated_data):
@@ -66,3 +67,9 @@ class UserRegSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("username", "code", "mobile", "password")
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("name", "gender", "birthday", "email", "mobile")

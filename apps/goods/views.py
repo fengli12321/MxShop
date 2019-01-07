@@ -20,7 +20,7 @@ class GoodsPagination(PageNumberPagination):
     page_query_param = 'page'
     max_page_size = 100
 # Create your views here.
-class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class GoodsListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
