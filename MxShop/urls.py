@@ -26,7 +26,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from goods.views import GoodsListViewSet, CategoryViewSet
 from users.views import SmsCodeViewSet, UserViewSet
 from user_operation.views import UserFavViewSets, LeavingMessageViewSets, AdressViewSets
-from trade.views import ShoppingCartViewSets
+from trade.views import ShoppingCartViewSets, OrderViewSets
 
 router = DefaultRouter()
 # 配置goods的url
@@ -55,6 +55,9 @@ router.register(r'address', AdressViewSets, base_name='address')
 
 # 购物车
 router.register(r'shopcarts', ShoppingCartViewSets, base_name="shopcarts")
+
+# 订单
+router.register(r'orders', OrderViewSets, base_name='orders')
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),

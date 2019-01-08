@@ -79,7 +79,7 @@ class Goods(models.Model):
         return self.name
 
 class IndexAd(models.Model):
-    category = models.ForeignKey(GoodsCategory, related_name='category',verbose_name="商品类目")
+    category = models.ForeignKey(GoodsCategory, related_name='category', verbose_name="商品类目")
     goods = models.ForeignKey(Goods, related_name='goods')
 
     class Meta:
