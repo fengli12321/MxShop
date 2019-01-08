@@ -28,7 +28,7 @@ SECRET_KEY = 'm+o+ad)med!b2im#+-or8$ru5hv-9h&*282^wa%1f)%*3#7)w*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = "users.UserProfile"
 
@@ -97,7 +97,7 @@ DATABASES = {
         'NAME': "mxshop",
         'USER': 'root',
         'PASSWORD': "12345678",
-        'HOST': "127.0.0.1"
+        'HOST': "129.28.107.12"
     }
 }
 
