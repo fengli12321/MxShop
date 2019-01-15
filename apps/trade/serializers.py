@@ -120,3 +120,5 @@ class OrderDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderInfo
         fields = "__all__"
+
+

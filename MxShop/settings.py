@@ -90,14 +90,14 @@ WSGI_APPLICATION = 'MxShop.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+# 'HOST': "129.28.107.12"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "mxshop",
         'USER': 'root',
         'PASSWORD': "12345678",
-        'HOST': "129.28.107.12"
+        'HOST': "127.0.0.1"
     }
 }
 
@@ -143,6 +143,10 @@ AUTHENTICATION_BACKENDS = (
 STATIC_URL = '/static/'
 
 MEDIA_URL = "/media/"
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_FRAMEWORK = {

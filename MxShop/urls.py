@@ -23,10 +23,11 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
-from goods.views import GoodsListViewSet, CategoryViewSet
+from goods.views import GoodsListViewSet, CategoryViewSet, BannerViewSets, HotSearchViewSets, IndexCategoryViewSet
 from users.views import SmsCodeViewSet, UserViewSet
 from user_operation.views import UserFavViewSets, LeavingMessageViewSets, AdressViewSets
 from trade.views import ShoppingCartViewSets, OrderViewSets, AliPayView
+from django.views.generic import TemplateView
 
 router = DefaultRouter()
 # 配置goods的url
@@ -56,8 +57,17 @@ router.register(r'address', AdressViewSets, base_name='address')
 # 购物车
 router.register(r'shopcarts', ShoppingCartViewSets, base_name="shopcarts")
 
+# 热搜
+router.register(r'hotsearchs', HotSearchViewSets, base_name="hotserchs")
+
 # 订单
 router.register(r'orders', OrderViewSets, base_name='orders')
+
+# 轮播图
+router.register(r'banners', BannerViewSets, base_name='banners')
+
+# 首页商品
+router.register(r'indexgoods', IndexCategoryViewSet, base_name='indexgoods')
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -67,5 +77,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^login/', obtain_jwt_token),
-    url(r'^alipay/return/', AliPayView.as_view(), name='alipay')
+    url(r'^alipay/return/', AliPayView.as_view(), name='alipay'),
+    url(r'^index/', TemplateView.as_view(template_name="index.html"), name='index')
 ]

@@ -59,6 +59,7 @@ class OrderViewSets(mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.Retr
 from rest_framework.views import APIView
 from utils.alipay import AliPay
 from rest_framework.response import Response
+from django.shortcuts import redirect
 class AliPayView(APIView):
     def get(self, request):
         process_dict = {}
@@ -85,8 +86,13 @@ class AliPayView(APIView):
                 exited_order.trade_no = trade_no
                 exited_order.pay_time = datetime.now()
                 exited_order.save()
-            return Response('success')
-
+            # return Response('success')
+            response = redirect("index")
+            response.set_cookie("nextPath", "pay", max_age=10)
+            return response
+        else:
+            response = redirect("index")
+            return response
 
     def post(self, request):
         process_dict = {}

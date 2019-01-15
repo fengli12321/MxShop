@@ -7,9 +7,9 @@ from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
-from .serializer import GoodsSerializer, CategorySerializer
+from .serializer import GoodsSerializer, CategorySerializer, BannerSeralizer, HotSearchSerializer, IndexCategorySerializer
 
-from .models import Goods, GoodsCategory
+from .models import Goods, GoodsCategory, Banner, HotSearchWords
 from .filters import GoodsFilter
 
 
@@ -39,3 +39,16 @@ class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets
 
     queryset = GoodsCategory.objects.filter(category_type=1)
     serializer_class = CategorySerializer
+
+
+class HotSearchViewSets(mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = HotSearchSerializer
+    queryset = HotSearchWords.objects.all().order_by('-index')
+
+class BannerViewSets(mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = BannerSeralizer
+    queryset = Banner.objects.all().order_by("index")
+
+class IndexCategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = GoodsCategory.objects.filter(is_tab=True, name__in=["生鲜食品", "酒水饮料"])
+    serializer_class = IndexCategorySerializer
