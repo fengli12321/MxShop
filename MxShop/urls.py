@@ -26,7 +26,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from goods.views import GoodsListViewSet, CategoryViewSet
 from users.views import SmsCodeViewSet, UserViewSet
 from user_operation.views import UserFavViewSets, LeavingMessageViewSets, AdressViewSets
-from trade.views import ShoppingCartViewSets, OrderViewSets
+from trade.views import ShoppingCartViewSets, OrderViewSets, AliPayView
 
 router = DefaultRouter()
 # 配置goods的url
@@ -67,4 +67,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^login/', obtain_jwt_token),
+    url(r'^alipay/return/', AliPayView.as_view(), name='alipay')
 ]
