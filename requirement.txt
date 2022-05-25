@@ -31,7 +31,7 @@ odfpy==1.4.0
 openpyxl==2.5.12
 Pillow==5.4.0
 pycryptodome==3.7.2
-PyJWT==1.7.1
+PyJWT==2.4.0
 pytz==2018.7
 PyYAML==3.13
 requests==2.21.0
